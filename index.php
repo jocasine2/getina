@@ -8,16 +8,16 @@ include('model/model.php');
 #criando modelo
 $nome='Post';
 $atributos = [
-			  'titulo'=> 'string'
-			  , 'texto'=>'string'
-			  ,'id_usuarios' => 'reference'
-			  ,'id_like' => 'reference'
-			 ];
+	'titulo'=> 'string'
+	, 'texto'=>'string'
+	,'id_usuarios' => 'reference'
+	,'id_like' => 'reference'
+];
 
 $relacionamentos = [
-				 'Usuario'=> '1' #todo <post> pertence a um <usuário> (belongs to)
-				 , 'Like'=>'n' #todo <post> tem vários <likes> (has many)
-				];
+	'Usuario'=> '1' #todo <post> pertence a um <usuário> (belongs to)
+	, 'Like'=>'n' #todo <post> tem vários <likes> (has many)
+];
 
 $modelObj = new Model($nome, $atributos, $relacionamentos);
 
