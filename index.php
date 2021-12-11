@@ -4,6 +4,7 @@ include('inflector.php');
 include('migration/migration.php');
 include('route/routes.php');
 include('model/model.php');
+include('controller/controller.php');
 
 #criando modelo
 $nome='Post';
@@ -21,14 +22,19 @@ $relacionamentos = [
 
 $modelObj = new Model($nome, $atributos, $relacionamentos);
 
-s('---------------------------------------------------------------------');
+// s('---------------------------------------------------------------------');
 #migrations
-s(migration($modelObj));
-s('---------------------------------------------------------------------');
+// s(migration($modelObj));
+// s('---------------------------------------------------------------------');
 #model
-s(model($modelObj));
-s('---------------------------------------------------------------------');
+// s(model($modelObj));
+// s('---------------------------------------------------------------------');
 #routes
-s(routes($modelObj));
-s('---------------------------------------------------------------------');;
+// s(routes($modelObj));
+// s('---------------------------------------------------------------------');
+#controller
+// s(controller($modelObj));
+// s('---------------------------------------------------------------------')
 
+#views
+include('views/index.blade.php');

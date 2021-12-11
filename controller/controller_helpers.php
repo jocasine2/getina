@@ -23,7 +23,7 @@ function getControllerClass($modelObj){
 	$Inflector = new Inflector();
 	$plural = $Inflector->tabela($modelObj->name);
     $singular = $Inflector->singularize($plural);
-
+    $atributos = [];
 	#montando a lista de atributos
 	foreach ($modelObj->fillables as $atributo => $tipo) {
 		array_push($atributos, "'".$atributo."'");
@@ -85,7 +85,7 @@ function getControllerClass($modelObj){
                 $'.$singular.'->update($request->all());
                 $message = \''.$modelObj->name.' atualizado!\';
             }else{
-                return redirect()->route(\''.$plural.'.index\')->with(\'error\',\'Falha ao atualizar cliente...\');
+                return redirect()->route(\''.$plural.'.index\')->with(\'error\',\'Falha ao atualizar '.$singular.'...\');
             }
     
             return redirect()->route(\''.$plural.'.index\')->with(\'success\', $message);

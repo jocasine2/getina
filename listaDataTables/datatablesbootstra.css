@@ -1,0 +1,60 @@
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #f9fafb !important;
+    border: 1px solid #468cf5;
+    background-color: white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #dcdcdc));
+    background: -webkit-linear-gradient(top, white 0%, #dcdcdc 100%);
+    background: -moz-linear-gradient(top, white 0%, #dcdcdc 100%);
+    background: -ms-linear-gradient(top, white 0%, #dcdcdc 100%);
+    background: -o-linear-gradient(top, white 0%, #dcdcdc 100%);
+    background: #468cf5;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    border: 1px solid #468cf5;
+    background-color: #585858;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #585858), color-stop(100%, #468cf5));
+    background: -webkit-linear-gradient(top, #585858 0%, #468cf5 100%);
+    background: -moz-linear-gradient(top, #585858 0%, #468cf5 100%);
+    background: -ms-linear-gradient(top, #585858 0%, #468cf5 100%);
+    background: -o-linear-gradient(top, #585858 0%, #468cf5 100%);
+    background: linear-gradient(to bottom, #468cf5 0%, #468cf5 100%);
+}
+
+.btn {
+    transition: none;
+}
+
+.dataTables_filter input {
+    border: none;
+    border-radius: none;
+    padding: none;
+    background-color: none;
+    margin-left: none;
+}
+
+.hidden{
+    display: none;
+}
+
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #e9ecef;
+    border-left-width: 0.25rem;
+    border-radius: 0.25rem;
+}
+
+.bd-callout form{
+    margin-bottom: 0px;
+}
+
+.bd-callout-info {
+    border-left-color: #468cf5;
+}
+
+.bd-callout-warning {
+    border-left-color: #f0ad4e;
+}
