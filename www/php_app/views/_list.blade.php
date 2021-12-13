@@ -1,6 +1,5 @@
-<?= include('_form.blade.php') ?>
+<?php include('_form.blade.php') ?>
 	
-<!-- tablela -->
 	<!-- jcsNetSearch Bar DataTables -->
 	<div class="row">
 		<div class="col-md-3">
@@ -24,7 +23,8 @@
 		</div>
 	</div>
 	<!-- jcsNetSearch Bar DataTables -->
-    
+
+	<!-- tablela -->
 	<table id="example" class="display responsive" style="width:100%">
 		<thead>
 			<tr>
@@ -40,23 +40,9 @@
 		<tbody>
 		</tbody>    
 	</table>
-</div>
-<!-- tabela -->
+	<!-- tabela -->
 
 <script>
-$('#myForm').submit(function(event) {
-	$(this).serialize();
-  	var registro = getInputs('myForm');
-	
-	if(registro){
-		add(registro);
-		formClear('myForm');
-	}
-
-	event.preventDefault();
-});
-
-
 $(document).ready(function() {
 	var buttonCommon = {
         exportOptions: {
@@ -112,13 +98,4 @@ $(document).ready(function() {
 	    table.page.len(this.value).draw();
 	});
 } );
-
-
-$('#demo').on('hidden.bs.collapse', function () {
-  $('#formButton').empty().append( '<i class="fas fa-plus-square"></i> Formulário' );
-})
-
-$('#demo').on('show.bs.collapse', function () {
-  $('#formButton').empty().append( '<i class="fas fa-minus-square"></i> Formulário' );
-})
 </script>

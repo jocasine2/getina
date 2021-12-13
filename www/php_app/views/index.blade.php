@@ -18,18 +18,18 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 
 <!-- Estilos customizados para dataTables -->
-<link href="datatablesbootstra.css" rel="stylesheet">
+<link href="listaDataTables/datatablesbootstra.css" rel="stylesheet">
 
 <div class="container">
 <?php
-    //  include('_list.blade.php');
-    include('show.blade.php');
+     include('_list.blade.php');
+    // include('show.blade.php');
 ?>
 </div>
 
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<script src="helpers.js"></script>
+<script src="listaDataTables/helpers.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
