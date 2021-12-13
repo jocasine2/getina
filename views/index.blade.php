@@ -22,7 +22,8 @@
 
 <div class="container">
 <?php
-    include('_list.blade.php');
+    //  include('_list.blade.php');
+    include('show.blade.php');
 ?>
 </div>
 

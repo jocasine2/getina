@@ -1,4 +1,4 @@
-	<?= include('_form.blade.php') ?>
+<?= include('_form.blade.php') ?>
 	
 <!-- tablela -->
 	<!-- jcsNetSearch Bar DataTables -->
