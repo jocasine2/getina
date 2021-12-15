@@ -67,33 +67,34 @@ echo table($modelObj);
 
 <script>
 $(document).ready(function() {
-	var buttonCommon = {
-        exportOptions: {
-            format: {
-                body: function ( data, row, column, node ) {
-                    // Strip $ from salary column to make it numeric
-                    return column === 5 ?
-                        data.replace( /[$,]/g, '' ) :
-                        data;
-                }
-            }
-        }
-    };
-
 	var table = $('#example').DataTable({
-        ajax: 'https://gyrocode.github.io/files/jquery-datatables/arrays.json'
+        ajax: 'views/posts.json'
 		,"aoColumns": [
         	{"sWidth": "13%", "mData": 0},
         	{"sWidth": "13%", "mData": 1},
-        	{"sWidth": "16%", "mData": 2},
-        	{"sWidth": "10%", "mData": 3},
-			{"sWidth": "15%", "mData": 4},
-			{"sWidth": "13%", "mData": 5},
 			{"mData": null, "bSortable": false, "mRender": function(data, type, full) {
 				return '<a class="btn btn-primary" href="javascript:editar_lista_enderecos(\''+full[0]+'\')" title="Editar"><i class="fas fa-edit"></i> Editar</a>\
 					<a class="btn btn-danger" href="javascript:btn_excluir(\''+full[0]+'\')" title="Excluir"><i class="fas fa-trash-alt"></i> Excluir</a>';
 			}
           }],
+		  "oLanguage": {
+					"sInfoThousands": ".",
+                    "sProcessing":   "Processando...",
+                    "sLengthMenu":   "Mostrar _MENU_ registros",
+                    "sZeroRecords":  "Não foram encontrados resultados",
+                    "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registros",
+                    "sInfoFiltered": "",
+                    "sInfoPostFix":  "",
+                    "sSearch":       "Buscar:",
+                    "sUrl":          "",
+                    "oPaginate": {
+                        "sFirst":    "Primeiro",
+                        "sPrevious": "Anterior",
+                        "sNext":     "Seguinte",
+                        "sLast":     "Último"
+                    }
+                },
         dom: 'Bfrtip',
         buttons: [
             $.extend( true, {}, buttonCommon, {
@@ -108,14 +109,27 @@ $(document).ready(function() {
         ]
     });
 
-    $( ".paginate_button" ).addClass( "btn btn-light" );
+	var buttonCommon = {
+        exportOptions: {
+            format: {
+                body: function ( data, row, column, node ) {
+                    // Strip $ from salary column to make it numeric
+                    return column === 5 ?
+                        data.replace( /[$,]/g, '' ) :
+                        data;
+                }
+            }
+        }
+    };
 
+    $( ".paginate_button" ).addClass( "btn btn-light" );
     $('#example_length, #example_filter').addClass('hidden');
     
+	// binding
 	$('#inputSearch').on( 'keyup', function () {
 	    table.search( this.value ).draw();
 	} );
-
+	// binding
 	$('#selectLength').on( 'change', function () {
 	    table.page.len(this.value).draw();
 	});
