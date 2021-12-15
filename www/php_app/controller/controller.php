@@ -12,10 +12,9 @@ function controller($modelObj){
         $class = getControllerClass($modelObj);
         
     /*Juntando tudo*/
-
-    $controller = (ltrim(arrayToList($namespace)));
+    $controller = ltrim(arrayToList($namespace));
     $controller .= '
-    '.($class);
+    '.$class;
 
     return $controller;
 }

@@ -29,7 +29,7 @@
 			</div>
 			<div id="demo" class="collapse">
 				<div class="card-body">
-					<h5 class="card-title">Special title treatment</h5>
+					<h5 class="card-title">Formulário</h5>
 					<!-- form -->
 					<form id="myForm">
 						<div class="mb-3">

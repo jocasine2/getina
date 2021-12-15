@@ -20,10 +20,27 @@ function getImputs($modelObj){
     return $html;
 }
 
+#human label
+function hl($str){
+    if(strstr($str, 'id_')){
+        $str = str_replace('id_',' ', $str);
+    }
+
+    if(strstr($str, '_')){
+        $str = str_replace('_',' ', $str);
+    }
+
+    if(!ctype_upper($str[0])){
+        $str = ucfirst($str);
+    }
+
+    return $str;
+}
+
 function input_text($modelObj, $attribute){
 
     $html = '<div class="mb-3">
-                <label class="form-label">'.$attribute.'</label>
+                <label class="form-label">'.hl($attribute).'</label>
                 <input type="text" name="'.$attribute.'" class="form-control" placeholder="'.$attribute.'">
             </div>';
 
@@ -43,11 +60,11 @@ $inputs = getImputs($modelObj);
 $html = '<!-- collapse -->
         <div class="card">
             <div class="card-header">
-                <a href="#demo" id="formButton" class="btn btn-secondary" data-bs-toggle="collapse" ><i class="fas fa-plus-square"></i> Formuário</a>
+                <a href="#demo" id="formButton" class="btn btn-secondary" data-bs-toggle="collapse" ><i class="fas fa-plus-square"></i> '.$modelObj->name.'</a>
             </div>
             <div id="demo" class="collapse">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
+                    <h5 class="card-title"></h5>
                     <!-- form -->
                     <form id="myForm">
                         '.$inputs.'
@@ -96,11 +113,11 @@ $html = '<!-- collapse -->
 
         //form collapse button
         $(\'#demo\').on(\'hidden.bs.collapse\', function () {
-        $(\'#formButton\').empty().append( \'<i class="fas fa-plus-square"></i> Formulário\' );
+            $(\'#formButton\').empty().append( \'<i class="fas fa-plus-square"></i> '.$modelObj->name.'\' );
         })
 
         $(\'#demo\').on(\'show.bs.collapse\', function () {
-        $(\'#formButton\').empty().append( \'<i class="fas fa-minus-square"></i> Formulário\' );
+            $(\'#formButton\').empty().append( \'<i class="fas fa-minus-square"></i> '.$modelObj->name.'\' );
         })
         </script>';
 

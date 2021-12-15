@@ -12,7 +12,7 @@ $atributos = [
 	'titulo'=> 'string'
 	, 'texto'=>'string'
 	,'id_usuarios' => 'reference'
-	,'id_like' => 'reference'
+
 ];
 
 $relacionamentos = [
@@ -21,7 +21,7 @@ $relacionamentos = [
 ];
 
 $modelObj = new Model($nome, $atributos, $relacionamentos);
-
+s($modelObj);
 // s('---------------------------------------------------------------------');
 #migrations
 // s(migration($modelObj));
