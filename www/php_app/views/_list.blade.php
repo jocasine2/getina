@@ -58,80 +58,131 @@ function table($modelObj, $columns=[], $actions=[]){
 
 	return $html;
 }
+
+function script_datatables($modelObj, $columns=[], $actions=['edit'=>'Editar', 'delete'=>'Excluir'], $export= ['copy', 'excel', 'pdf']){
+	
+	$html = '<script>
+	$(document).ready(function() {
+		var table = $(\'#example\').DataTable({
+			ajax: \'views/'.$modelObj->plural.'.json\'
+			,"aoColumns": [';
+
+			if(empty($columns)){
+				foreach ($modelObj->fillables as $column => $type) {
+					if(!strstr($column, 'id_')){
+						$html .='{"sWidth": "13%", "mData": 0},';
+					}
+				}
+			}	
+
+		$html .= '{"sWidth": "5%", "mData": null, "bSortable": false, "mRender": function(data, type, full) {
+					return ';
+
+					$html .= '\'';
+
+					if(existe_array('edit', $actions, 'key')){
+						$html .= '<a class="btn btn-primary" href="javascript:editar_lista_'.$modelObj->plural.'(\\\'\'+full[0]+\'\\\')" title="'.$actions['edit'].'"><i class="fas fa-edit"></i> '.$actions['edit'].'</a>';
+					}
+
+					if(existe_array('delete', $actions, 'key')){
+						$html .= ' <a class="btn btn-danger" href="javascript:excluir_lista_'.$modelObj->plural.'(\\\'\'+full[0]+\'\\\')" title="'.$actions['edit'].'"><i class="fas fa-trash-alt"></i> '.$actions['edit'].'</a>';
+					}
+
+					$html .= '\'';
+
+		$html .= '		}
+			  }],';
+			  
+		$html .= '"oLanguage": {
+						"sInfoThousands": ".",
+						"sProcessing":   "Processando...",
+						"sLengthMenu":   "Mostrar _MENU_ registros",
+						"sZeroRecords":  "Não foram encontrados resultados",
+						"sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+						"sInfoEmpty":    "Mostrando de 0 até 0 de 0 registros",
+						"sInfoFiltered": "",
+						"sInfoPostFix":  "",
+						"sSearch":       "Buscar:",
+						"sUrl":          "",
+						"oPaginate": {
+							"sFirst":    "Primeiro",
+							"sPrevious": "Anterior",
+							"sNext":     "Seguinte",
+							"sLast":     "Último"
+						}
+					},
+			dom: \'Bfrtip\',
+			buttons: [';
+			
+			$qtd_virgola = sizeof($export)-1;
+
+			if(existe_array('copy', $export)){
+				$html .= '$.extend( true, {}, buttonCommon, {
+					extend: \'copyHtml5\'
+				})';
+
+				if($qtd_virgola>0){
+					$html .= ',';
+				}
+			}
+
+			if(existe_array('excel', $export)){
+				$html .= '$.extend( true, {}, buttonCommon, {
+					extend: \'excelHtml5\'
+				})';
+
+				if($qtd_virgola>0){
+					$html .= ',';
+				}
+			}
+
+			if(existe_array('pdf', $export)){
+				$html .='$.extend( true, {}, buttonCommon, {
+					extend: \'pdfHtml5\'
+				})'; 
+
+				if($qtd_virgola>0){
+					$html .= ',';
+				}
+			}
+
+			$html .= ']
+		});
+	
+		var buttonCommon = {
+			exportOptions: {
+				format: {
+					body: function ( data, row, column, node ) {
+						// Strip $ from salary column to make it numeric
+						return column === 5 ?
+							data.replace(/[$,]/g, \'\') :
+							data;
+					}
+				}
+			}
+		};
+	
+		$( ".paginate_button" ).addClass( "btn btn-light" );
+		$(\'#example_length, #example_filter\').addClass(\'hidden\');
+		
+		// binding
+		$(\'#inputSearch\').on( \'keyup\', function () {
+			table.search( this.value ).draw();
+		});
+		// binding
+		$(\'#selectLength\').on( \'change\', function () {
+			table.page.len(this.value).draw();
+		});
+	} );
+	</script>';
+
+	return $html;
+}
+
 echo searchBar();
 echo table($modelObj);
-
+echo script_datatables($modelObj, $columns=[]);
 ?>
 
 	
 
-<script>
-$(document).ready(function() {
-	var table = $('#example').DataTable({
-        ajax: 'views/posts.json'
-		,"aoColumns": [
-        	{"sWidth": "13%", "mData": 0},
-        	{"sWidth": "13%", "mData": 1},
-			{"mData": null, "bSortable": false, "mRender": function(data, type, full) {
-				return '<a class="btn btn-primary" href="javascript:editar_lista_enderecos(\''+full[0]+'\')" title="Editar"><i class="fas fa-edit"></i> Editar</a>\
-					<a class="btn btn-danger" href="javascript:btn_excluir(\''+full[0]+'\')" title="Excluir"><i class="fas fa-trash-alt"></i> Excluir</a>';
-			}
-          }],
-		  "oLanguage": {
-					"sInfoThousands": ".",
-                    "sProcessing":   "Processando...",
-                    "sLengthMenu":   "Mostrar _MENU_ registros",
-                    "sZeroRecords":  "Não foram encontrados resultados",
-                    "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                    "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registros",
-                    "sInfoFiltered": "",
-                    "sInfoPostFix":  "",
-                    "sSearch":       "Buscar:",
-                    "sUrl":          "",
-                    "oPaginate": {
-                        "sFirst":    "Primeiro",
-                        "sPrevious": "Anterior",
-                        "sNext":     "Seguinte",
-                        "sLast":     "Último"
-                    }
-                },
-        dom: 'Bfrtip',
-        buttons: [
-            $.extend( true, {}, buttonCommon, {
-                extend: 'copyHtml5'
-            } ),
-            $.extend( true, {}, buttonCommon, {
-                extend: 'excelHtml5'
-            } ),
-            $.extend( true, {}, buttonCommon, {
-                extend: 'pdfHtml5'
-            } )
-        ]
-    });
-
-	var buttonCommon = {
-        exportOptions: {
-            format: {
-                body: function ( data, row, column, node ) {
-                    // Strip $ from salary column to make it numeric
-                    return column === 5 ?
-                        data.replace( /[$,]/g, '' ) :
-                        data;
-                }
-            }
-        }
-    };
-
-    $( ".paginate_button" ).addClass( "btn btn-light" );
-    $('#example_length, #example_filter').addClass('hidden');
-    
-	// binding
-	$('#inputSearch').on( 'keyup', function () {
-	    table.search( this.value ).draw();
-	} );
-	// binding
-	$('#selectLength').on( 'change', function () {
-	    table.page.len(this.value).draw();
-	});
-} );
-</script>
